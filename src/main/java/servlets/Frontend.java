@@ -15,11 +15,12 @@ import java.util.Map;
  */
 public class Frontend extends HttpServlet {
 
-    private String value = "";
+    private static String value = "";
 
     private static Map<String, Object> createPageVariablesMap(HttpServletRequest request) {
         Map<String, Object> pageVariables = new HashMap<>();
-        pageVariables.put("parameters", request.getParameterMap().toString());
+        value = request.getParameter("key");
+        pageVariables.put("value", value == null ? "" : value);
         return pageVariables;
     }
 
@@ -35,19 +36,6 @@ public class Frontend extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Map<String, Object> pageVariables = createPageVariablesMap(request);
 
-        value = request.getParameter("key");
-
-        response.setContentType("text/html;charset=utf-8");
-
-        if (value == null || value.isEmpty()) {
-            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-        } else {
-            response.setStatus(HttpServletResponse.SC_OK);
-        }
-        pageVariables.put("parameters", value == null ? "" : value);
-
-        response.getWriter().println(PageGenerator.instance().getPage("page.html", pageVariables));
     }
 }
