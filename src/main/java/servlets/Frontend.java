@@ -15,31 +15,18 @@ import java.util.Map;
  */
 public class Frontend extends HttpServlet {
 
-    private static String value = "";
-
-    private static Map<String, Object> createPageVariablesMap(HttpServletRequest request) {
-        Map<String, Object> pageVariables = new HashMap<>();
-        value = request.getParameter("key");
-        pageVariables.put("value", value == null ? "" : value);
-        return pageVariables;
-    }
-
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Map<String, Object> pageVariables = createPageVariablesMap(request);
-
+        
         // TODO: отправить не html страницу c ответом, а просто текст.
         // Все, что вам нужно - это использовать response.getWriter.println(ваша строка).
         // Ну и все остальное, что нужно в doGet.
         // Тогда у вас нормально отобразится строчка, которую подставили в key и вы все пройдете.
-        // response.getWriter().println(PageGenerator.instance().getPage("page.html", pageVariables));
-
+        
+        String value = request.getParameter("key");
+        response.getWriter().println(value == null ? "" : value);
         response.setContentType("text/html;charset=utf-8");
         response.setStatus(HttpServletResponse.SC_OK);
     }
 
-    @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
 }
