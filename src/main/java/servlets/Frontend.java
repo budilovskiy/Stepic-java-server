@@ -28,6 +28,7 @@ public class Frontend extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Map<String, Object> pageVariables = createPageVariablesMap(request);
 
+        // TODO: отправить не html страницу c ответом, а просто текст.
         response.getWriter().println(PageGenerator.instance().getPage("page.html", pageVariables));
 
         response.setContentType("text/html;charset=utf-8");
