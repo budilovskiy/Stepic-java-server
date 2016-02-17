@@ -29,7 +29,10 @@ public class Frontend extends HttpServlet {
         Map<String, Object> pageVariables = createPageVariablesMap(request);
 
         // TODO: отправить не html страницу c ответом, а просто текст.
-        response.getWriter().println(PageGenerator.instance().getPage("page.html", pageVariables));
+        // Все, что вам нужно - это использовать response.getWriter.println(ваша строка).
+        // Ну и все остальное, что нужно в doGet.
+        // Тогда у вас нормально отобразится строчка, которую подставили в key и вы все пройдете.
+        // response.getWriter().println(PageGenerator.instance().getPage("page.html", pageVariables));
 
         response.setContentType("text/html;charset=utf-8");
         response.setStatus(HttpServletResponse.SC_OK);
